@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counting Down...</title>
+    <title>For Afsana...</title>
     <style>
         body {
             margin: 0;
@@ -17,26 +17,27 @@
             font-family: 'Arial', sans-serif;
             text-align: center;
             color: #ff4d4d;
-            overflow: hidden; /* Prevents scrollbars from the floating hearts */
+            overflow: hidden; 
             position: relative;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 20px;
-            z-index: 10; /* Keeps text above hearts */
+            z-index: 10;
+            padding: 0 10px;
         }
 
         #timer {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: bold;
             background: rgba(255, 255, 255, 0.9);
-            padding: 20px 40px;
+            padding: 15px 25px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             color: #ff6b6b;
             display: flex;
-            gap: 15px;
+            gap: 10px;
             margin-bottom: 30px;
             z-index: 10;
         }
@@ -48,14 +49,15 @@
         }
 
         .label {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: #888;
             font-weight: normal;
+            text-transform: uppercase;
         }
 
         .btn {
             padding: 15px 30px;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: white;
             border: none;
             border-radius: 50px;
@@ -78,24 +80,24 @@
 
         #nice-try-msg {
             display: none;
-            margin-top: 20px;
-            font-size: 1.2rem;
+            margin-top: 25px;
+            font-size: 1.3rem;
             font-weight: bold;
             color: #d63031;
             z-index: 10;
+            animation: fadeIn 0.5s ease-in;
         }
 
         #surprise-img {
             display: none;
             max-width: 90%;
-            max-height: 80vh;
+            max-height: 75vh;
             border-radius: 15px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             animation: fadeIn 1s ease-in;
             z-index: 20;
         }
 
-        /* --- Floating Hearts Styling --- */
         .heart {
             position: absolute;
             bottom: -20px;
@@ -107,14 +109,8 @@
         }
 
         @keyframes floatUp {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-110vh) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
         @keyframes pulse {
@@ -124,8 +120,13 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 400px) {
+            #timer { font-size: 1.8rem; padding: 10px 15px; }
+            h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -140,8 +141,8 @@
         <div class="time-segment"><span id="seconds">00</span><span class="label">Secs</span></div>
     </div>
 
-    <button id="fake-reveal-btn" class="btn">Reveal Surprise</button>
-    <div id="nice-try-msg">Nice Try!!! See you soon</div>
+    <button id="fake-reveal-btn" class="btn">Reveal Surprise Early</button>
+    <div id="nice-try-msg">Nice Try Afsana!!! See you soon ❤️</div>
 
     <button id="reveal-btn" class="btn">Click Here ❤️</button>
 
@@ -158,33 +159,24 @@
         const niceTryMsg = document.getElementById('nice-try-msg');
         const imageElement = document.getElementById('surprise-img');
 
-        // Heart Animation Logic
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart');
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's'; // Between 2-5 seconds
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
             heart.style.opacity = Math.random();
             heart.style.fontSize = Math.random() * 20 + 10 + 'px';
-            
             document.body.appendChild(heart);
-
-            // Remove heart after animation ends so the page doesn't get slow
-            setTimeout(() => {
-                heart.remove();
-            }, 5000);
+            setTimeout(() => { heart.remove(); }, 5000);
         }
 
-        // Spawn a heart every 300ms
         setInterval(createHeart, 300);
 
-        // Fake Button Logic
         fakeButton.addEventListener('click', function() {
             niceTryMsg.style.display = "block";
         });
 
-        // Countdown Logic
         const x = setInterval(function() {
             const now = new Date().getTime();
             const distance = countToDate - now;
@@ -204,7 +196,7 @@
                 timerElement.style.display = "none";
                 fakeButton.style.display = "none";
                 niceTryMsg.style.display = "none";
-                titleElement.innerHTML = "I have something for you...";
+                titleElement.innerHTML = "I have something for you, Afsana...";
                 buttonElement.style.display = "block";
             }
         }, 1000);
